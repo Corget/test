@@ -1,0 +1,174 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%; /* Light mode background - very light gray */
+    --foreground: 222 47% 11%; /* Light mode text - dark blue/black */
+    
+    --card: 0 0% 100%; /* Light mode card background - white */
+    --card-foreground: 222 47% 11%; /* Light mode card text - dark blue/black */
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 142 76% 36%; /* Green for primary actions */
+    --primary-foreground: 210 40% 98%; /* Text on primary - light */
+    
+    --secondary: 217 91% 60%; /* Blue for secondary actions */
+    --secondary-foreground: 210 40% 98%; /* Text on secondary - light */
+    
+    --muted: 210 40% 96.1%; /* Light mode muted background - light gray */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Light mode muted text - medium gray */
+    
+    --accent: 210 40% 93%; /* Light mode accent - slightly darker gray for hover */
+    --accent-foreground: 222.2 47.4% 11.2%; /* Light mode accent text */
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214.3 31.8% 91.4%; /* Light mode border - light gray */
+    --input: 214.3 31.8% 91.4%; /* Light mode input background */
+    --ring: 222.2 84% 4.9%;
+    
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%; /* Dark mode background - very dark blue */
+    --foreground: 210 40% 98%; /* Dark mode text - light gray/white */
+    
+    --card: 220 15% 15%; /* Dark mode card background - dark gray */
+    --card-foreground: 210 40% 98%; /* Dark mode card text - light gray/white */
+    
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 142 70% 45%; /* Adjusted Green for dark mode */
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 217 80% 65%; /* Adjusted Blue for dark mode */
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%; /* Dark mode muted background - dark blue/gray */
+    --muted-foreground: 215 20.2% 65.1%; /* Dark mode muted text - lighter gray */
+    
+    --accent: 220 15% 25%; /* Dark mode accent - slightly lighter dark gray for hover */
+    --accent-foreground: 210 40% 98%; /* Dark mode accent text */
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217.2 32.6% 25%; /* Dark mode border - dark gray */
+    --input: 217.2 32.6% 17.5%; /* Dark mode input background */
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+.minecraft-btn {
+  position: relative;
+  display: inline-flex; /* Changed to inline-flex */
+  align-items: center; /* Vertically align icon and text */
+  justify-content: center; /* Horizontally align icon and text */
+  border: 2px solid #000;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: inset -2px -4px #0006, inset 2px 2px #fff7;
+  transition: all 0.1s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.dark .minecraft-btn {
+  border-color: #ccc;
+  box-shadow: inset -2px -4px #0009, inset 2px 2px #fff3;
+}
+
+
+.minecraft-btn:active {
+  box-shadow: inset -2px -4px #0006, inset 2px 2px #fff7;
+  transform: translateY(2px);
+}
+
+.dark .minecraft-btn:active {
+  box-shadow: inset -2px -4px #0009, inset 2px 2px #fff3;
+}
+
+.minecraft-btn:before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+}
+
+.minecraft-btn.green {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.minecraft-btn.blue {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.hero-pattern-dynamic {
+  background-color: transparent; /* Will be controlled by body's bg-background */
+}
+
+.light .hero-pattern-dynamic {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .hero-pattern-dynamic {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Ensure Radix Switch thumb uses theme colors */
+.dark .data-\[state\=checked\]\:bg-primary > span {
+  background-color: hsl(var(--background)) !important; /* Dark mode switch knob */
+}
+.light .data-\[state\=checked\]\:bg-primary > span {
+   background-color: hsl(var(--background)) !important; /* Light mode switch knob */
+}
+
+.dark .data-\[state\=unchecked\]\:bg-input > span {
+  background-color: hsl(var(--background)) !important; /* Dark mode switch knob */
+}
+.light .data-\[state\=unchecked\]\:bg-input > span {
+   background-color: hsl(var(--background)) !important; /* Light mode switch knob */
+}
+
+/* Custom styles for the theme toggle switch */
+.data-\[state\=checked\]\.bg-gray-700 {
+  background-color: #4A5568 !important; /* Dark mode switch track */
+}
+.data-\[state\=unchecked\]\.bg-gray-300 {
+  background-color: #E2E8F0 !important; /* Light mode switch track */
+}
+
+.dark .bg-gray-900 { /* For the switch knob in dark mode */
+  background-color: #1A202C !important;
+}
+
+.light .bg-white { /* For the switch knob in light mode */
+   background-color: #FFFFFF !important;
+}
