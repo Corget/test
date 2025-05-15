@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { createLogger, defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/test/', 
+  base: '/test/', // name of your GitHub repo
   plugins: [react()],
 })
 
